@@ -5,8 +5,8 @@ Group project Javascript II WEB-330 - Javascript Trivia Game
 
 ## King Major-Bellevue University
 
-##Rochelle Markham-Bellevue University
+## Rochelle Markham-Bellevue University
 
-##Michelle Nesbitt-Bellevue University
+## Michelle Nesbitt-Bellevue University
 
-##Rhonda Rivas-Bellevue University
+## Rhonda Rivas-Bellevue University
