@@ -1,0 +1,35 @@
+*{padding: 0; margin: 0;box-sizing-border-box;}
+body {
+font-family: 'lucida console', sans-serif;
+}
+h1, h2, h3, h4, p {
+margin-bottom: 10px;
+}
+results {
+padding:20px;
+display: flex;
+flex-direction:column;
+text-align: justify;
+height: 100vh;
+justify-content: center;
+align-items: center;
+color: white;
+position: relative;
+
+}
+results > * {
+position: relative;
+z-index: 2;
+}
+container:nth-of-type(){
+background-image: url(Colored_Blue_1920x1080.png);
+background-position: center;
+}
+results:after {
+content: "";
+position: absolute;
+left: 0; top:0;
+width:100%; height:100%;
+background: rgba(63.136.191);
+z-index: 1;
+}
