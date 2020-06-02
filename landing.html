@@ -1,28 +1,152 @@
-<!--/*
-======================================================
-; Title:  landing.html
-; Author: Michelle Nesbitt
-; Date:   5-16-2020
-; Modified By: Michelle Nesbitt
-; Description: Landing page for the quiz
-;=====================================================
-*/-->
-
-<!doctype html>
-<html lang="en">
-  <head>
-    
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    
-    <link rel="stylesheet" href="css/style2.css">
-
-    <title>Welcome to the Javascript Quiz</title>
-  </head>
-  <body>
-    Welcome to the Javascript Quiz! Remember this is just a test!<br>
 
 
-    </body>
-    </html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Javascript Trivia Quiz</title>
+<style id="applicationStylesheet" type="text/css">
+	.mediaViewInfo {
+		--web-view-name: Web 1920 – 1;
+		--web-view-id: Web_1920___1;
+		--web-scale-on-resize: true;
+		--web-center-horizontally: true;
+		--web-enable-deep-linking: true;
+	}
+	:root {
+		--web-view-ids: Web_1920___1;
+	}
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		border: none;
+	}
+	#main {
+		position: absolute;
+		transform: translateX(-50%);
+		left: 50%;
+		width: 1920px;
+		height: 1080px;
+		background-color: rgba(255,255,255,1);
+		overflow: hidden;
+		--web-view-name: Web 1920 – 1;
+		--web-view-id: Web_1920___1;
+		--web-scale-on-resize: true;
+		--web-center-horizontally: true;
+		--web-enable-deep-linking: true;
+	}
+	.topdiv {
+		position: absolute;
+		overflow: visible;
+		width: 1920px;
+		height: 173px;
+		left: 0px;
+		top: 0px;
+		background-color: rgba(59,52,122,1);
+	}
+	#JAVASCRIPT_TRIVIA_QUIZ {
+		position: absolute;
+		left: 643px;
+		top: 47px;
+		overflow: visible;
+		width: 659px;
+		white-space: nowrap;
+		text-align: center;
+		font-family: Segoe UI;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 60px;
+		color: rgba(242,174,15,1);
+	}
+	.yellowdiv {
+		position: absolute;
+		overflow: visible;
+		width: 1920px;
+		height: 64px;
+		left: 0px;
+		top: 173px;
+		background-color: rgba(242,174,15,1);
+	}
+	#jsquiz {
+		position: absolute;
+		left: 670px;
+		top: 326px;
+		overflow: visible;
+		width: 593px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Segoe UI;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 36px;
+		color: rgba(59,52,122,1);
+	}
+	#buttoncontainer {
+		position: absolute;
+		width: 290px;
+		height: 79px;
+		left: 815px;
+		top: 501px;
+		overflow: visible;
+		border-color: rgba(59,52,122,1);
+		border:1px;
+		background-color: rgba(242,174,15,1);
+	}
+	.button1 {
+		filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.161));
+		position: absolute;
+		overflow: visible;
+		width: 308px;
+		height: 97px;
+		left: 0px;
+		top: 0px;
+		background-color: rgba(242,174,15,1);		
+	
+	}
+	#Start_Quiz {
+		position: absolute;
+		left: 57px;
+		top: 13px;
+		overflow: visible;		
+		width: 174px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Segoe UI;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 40px;
+		color: rgba(59,52,122,1);
+	}
+</style>
+
+
+
+</script>
+</head>
+<body>
+<div id="main">
+	<div class="topdiv">	
+		<div>
+			<span id="JAVASCRIPT_TRIVIA_QUIZ">JAVASCRIPT TRIVIA QUIZ</span>
+		</div>
+	</div>
+	<div class="yellowdiv">		
+	</div>
+	
+	<div id="jsquiz">
+		Welcome to the JavaScript trivia quiz!
+	</div>
+
+	<div id="buttoncontainer">
+		<div class="button1">
+			<div id="Start_Quiz">
+				<span><a href="quiz.html">Start Quiz</a></span>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
