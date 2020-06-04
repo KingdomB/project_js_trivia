@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Javascript Trivia Quiz</title>
+        <!--<script src="Quiz.js"></script>-->
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <!--google fonts-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=PT+Mono&display=swap" rel="stylesheet">
+        <!--knockout.js-->
+        <script src="../web-330/knockout-3.4.2.js"></script>
+    </head>
+    <header>
+        <!--purple div/main title/nav bar-->
+        <div class="topdiv">	
+            <h1>Javascript Trivia</h1>
+	    </div>
+        <!--yellow div-->
+        <div id="yellow"></div>
+    </header>
+    <body>
+        <!--landing page heading/disappears when start is clicked-->
+	    <div id="jsquiz">
+            <h2>Welcome to the JavaScript trivia quiz!</h2>
+        </div>
+        <!--trying to get the View model to link here, but having issues-->
+	    <div data-bind="text: questions" id="buttoncontainer">
+           <!--Tried using a function (see bottom) to link the ViewModel at a specific index-->
+            <div data-bind="text: addQuestion()" id="question">
+                <!--This is just a placeholder and will be deleted later-->
+                <p>Question</p>
+            </div>
+            <!--answers will display on buttons, these need to be linked to the ViewModel and to the specific index. If we want we can change these to radio buttons.I just thought these looked nicer. We can also try to change these to input type="button" to see if that helps-->
+            <div id="answers">
+                <button data-bind="text: A" class="button">A.</button>
+                <button data-bind="text: B" class="button">B.</button>
+                <button data-bind="text: C" class="button">C.</button>
+                <button data-bind="text: D" class="button">D.</button>
+            </div>
+            <!--Start button. onclick activates the hide function. I read something about knockout having a visibile/hidden binding, so we could try that-->
+            <input type=button onClick="hide()" class="start-button" id="start" value="Start Quiz"/>
+            <div id="next">
+                <button class="button" id="nextButton">Button</button>
+            </div>
+        </div>
+        <script type="text/javascript">
+            //this function is activated by the Start button and makes the 
+            //landing page heading and the start button disappear, while the
+            //question and answers button appear. Can do this with knockout if 
+            //we want. Need to include the next button here as well
+            function hide(){
+                if(document.getElementById){ 
+                    document.getElementById("start").style.visibility = "hidden";
+                    document.getElementById("jsquiz").style.visibility = "hidden";
+                    document.getElementById("question").style.visibility =
+                    "visible";
+                    document.getElementById("answers").style.visibility = "visible";
+                }
+            };
+        </script>
+        <script type=text/javascript>
+            //Questions array. See assignments/examples for this week to see 
+            //why i set these up this way
+            function QuestionViewModel(){
+                this.questions=ko.observableArray([
+                    //Question 1: index 0
+                    {question: "Which of the following is not an escape sequence in JavaScript?",
+                    A: "\\",
+                    B: "\\t",
+                    C: "\\r",
+                    D: "\\\'",
+                    correct: A,
+                    },
+                    //Question 2, index 1
+                    {question: "Which of the following are used to enclose function parameters?",
+                    A: "{}",
+                    B: "[]",
+                    C: "()",
+                    D: "<>",
+                    correct: C,
+                    },
+                    //Question 3, index 2
+                    {question: "Which method of an Array calls a function for each element in the array?",
+                    A: "forEach()",
+                    B: "every()",
+                    C: "forEvery()",
+                    D: "each()",
+                    correct: A,
+                    },
+                    //Question 4, index 3
+                    {question: "Under which HTML tag is JavaScript code written?",
+                    A: "<javascript>",
+                    B: "<jscode>", 
+                    C: "<js>",
+                    D: "<script>",
+                    correct: D,
+                    },
+                    //Question 5, index 4
+                    {question: "How do you call myFunction() in JavaScript?",
+                    A: "Call myFunc()",
+                    B: "myFunction()",
+                    C: "Call function myFunction()",
+                    D: "function myFunction",
+                    correct: B,
+                    },
+                    //Question 6, index 5
+                    {question: "Which of the following is not valid in JavaScript?",
+                    A: "const name = 'John';",
+                    B: "var name = 'John';",
+                    C: "console.log(name);",
+                    D: "int number = 10;",
+                    correct: D,
+                    },
+                    //Question 7, index 6
+                    {question: "Which assignment operator is invalid in JavaScript?",
+                    A: "x **= y;",
+                    B: "x == y;",
+                    C: "x %= y;",
+                    D: "x -= y;",
+                    correct: B,
+                    },
+                    //Question 8, index 7
+                    {question: "JavaScript is a ________-side scripting language.",
+                    A: "Server",
+                    B: "ISP",
+                    C: "Browser",
+                    D: "All of the above.",
+                    correct: C,
+                    },
+                    //Question 9, index 8
+                    {question: "Which of the following JavaScript statements displays 'Hello World' in an alert box?",
+                    A: "alerttext(“HelloWorld!”);",
+                    B: "alertmsg(“HelloWorld!”);",
+                    C: "msgbox(“HelloWorld!”);",
+                    D: "alert(“HelloWorld!”);",
+                    correct: D,
+                    },
+                    //Question 10, index 9
+                    {question: "What is the correct syntax for adding a comment in JavaScript?",
+                    A: "//This is a comment",
+                    B: "<!–-This is a comment-->",
+                    C: "-*This is a comment",
+                    D: "!This is a comment",
+                    correct: A,
+                    };
+                ]);
+            };
+            ko.applyBindings(new QuestionViewModel());
+        </script>
+        <script>
+            //playing with this to attemp to get the question to show based on
+            //the index of the array
+            function addQuestion(){
+                let index=0;
+                for(let x=0; x< question.lenth; x++)
+                return questions.question[x];
+                index++;
+            };
+        </script>>
+    </body>
+</html>
