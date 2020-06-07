@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Javascript Trivia Quiz</title>        
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <!--google fonts-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=PT+Mono&display=swap" rel="stylesheet">
+        <!--knockout.js-->
+        <script src="knockout-3.5.1.js"></script>
+        <script src="app.js"></script>
+    </head> 
+    <body>
+    <header>
+        <!--purple div/main title/nav bar-->
+        <div class="topdiv">	
+            <h1>Javascript Trivia</h1>
+	    </div>
+        <!--yellow div-->
+        <div id="yellow"></div>
+    </header>   
+        <!--landing page heading/disappears when start is clicked-->
+	    <div id="jsquiz">
+            <h2>Welcome to the JavaScript trivia quiz!</h2>
+        </div>
+        <!--trying to get the View model to link here, but having issues-->
+	    <div data-bind="html: questions" id="buttoncontainer">
+           <!--Tried using a function (see bottom) to link the ViewModel at a specific index-->
+            <div data-bind="html: addQuestion()" id="question">
+                <!--This is just a placeholder and will be deleted later-->
+                <p>Question</p>
+            </div>
+            <!--answers will display on buttons, these need to be linked to the ViewModel and to the specific index. If we want we can change these to radio buttons.I just thought these looked nicer. We can also try to change these to input type="button" to see if that helps-->
+            <div id="answers">
+                <button data-bind="html: A" class="button">A.</button>
+                <button data-bind="html: B" class="button">B.</button>
+                <button data-bind="html: C" class="button">C.</button>
+                <button data-bind="html: D" class="button">D.</button>
+            </div>
+            <!--Start button. onclick activates the hide function. I read something about knockout having a visibile/hidden binding, so we could try that-->
+            <input type=button onClick="hide()" class="start-button" id="start" value="Start Quiz"/>
+            <div id="next">
+                <button class="button" id="nextButton">Button</button>
+            </div>
+        </div>
+        
+       
+    </body>
+</html>
