@@ -12,37 +12,30 @@
         <script type="text/javascript" src="app.js"></script>     
        
     </head> 
-    <body>
-    <header>
+    <body>   
         <!--purple div/main title/nav bar-->
         <div class="topdiv">	
             <h1>Javascript Trivia</h1>
 	    </div>
         <!--yellow div-->
         <div id="yellow"></div>
-    </header>   
+    
         <!--landing page heading/disappears when start is clicked-->
 	    <div id="jsquiz">
-            <h2>Welcome to the JavaScript trivia quiz!</h2>
+             <h2>Welcome to the JavaScript trivia quiz!</h2>
         </div>
-        <!--trying to get the View model to link here, but having issues-->       
-       
+        <!--trying to get the View model to link here, but having issues-->        
         
-	 
+	 <div id="question">
            <!--Tried using a function (see bottom) to link the ViewModel at a specific index-->
-            <div data-bind="text: filter(1)" id="question">
-                <!--This is just a placeholder and will be deleted later-->
-                <div data-bind="foreach: filterQuestionsById">
-                    <div class="row">
-                        <div class="col-md-2" data-bind="text: question"></div>
-                        <div class="col-md-1" data-bind="text: A"></div>
-                        <div class="col-md-3" data-bind="text: B"></div>
-                        <div class="col-md-1" data-bind='text: C'></div>
-                        <div class="col-md-2" data-bind="text: D"></div>               
-                    </div>
-                </div>
-                <button data-bind="click: function() { filter(1) }">Filter</button>
+            <div data-bind="foreach: questions"> 
+                <div data-bind="text: question"></div>
+                <input type="button" class="button" data-bind="text: A"></input>
+                <input type="button" class="button" data-bind="text: B"></input>
+                <input type="button" class="button" data-bind="text: C"></input>
+                <input type="button" class="button" data-bind="text: D"></input>              
             </div>
+       </div>
             <!--answers will display on buttons, these need to be linked to the ViewModel and to the specific index. If we want we can change these to radio buttons.
                 I just thought these looked nicer. We can also try to change these to input type="button" to see if that helps
             <div id="answers">
