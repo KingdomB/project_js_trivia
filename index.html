@@ -8,8 +8,9 @@
         <!--google fonts-->
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=PT+Mono&display=swap" rel="stylesheet">
         <!--knockout.js-->
-        <script src="knockout-3.5.1.js"></script>
-        <script src="app.js"></script>
+        <script type="text/javascript" src="knockout-3.5.1.js"></script>
+        <script type="text/javascript" src="app.js"></script>     
+       
     </head> 
     <body>
     <header>
@@ -24,26 +25,38 @@
 	    <div id="jsquiz">
             <h2>Welcome to the JavaScript trivia quiz!</h2>
         </div>
-        <!--trying to get the View model to link here, but having issues-->
-	    <div data-bind="html: questions" id="buttoncontainer">
+        <!--trying to get the View model to link here, but having issues-->       
+       
+        
+	 
            <!--Tried using a function (see bottom) to link the ViewModel at a specific index-->
-            <div data-bind="html: addQuestion()" id="question">
+            <div data-bind="text: filter(1)" id="question">
                 <!--This is just a placeholder and will be deleted later-->
-                <p>Question</p>
+                <div data-bind="foreach: filterQuestionsById">
+                    <div class="row">
+                        <div class="col-md-2" data-bind="text: question"></div>
+                        <div class="col-md-1" data-bind="text: A"></div>
+                        <div class="col-md-3" data-bind="text: B"></div>
+                        <div class="col-md-1" data-bind='text: C'></div>
+                        <div class="col-md-2" data-bind="text: D"></div>               
+                    </div>
+                </div>
+                <button data-bind="click: function() { filter(1) }">Filter</button>
             </div>
-            <!--answers will display on buttons, these need to be linked to the ViewModel and to the specific index. If we want we can change these to radio buttons.I just thought these looked nicer. We can also try to change these to input type="button" to see if that helps-->
+            <!--answers will display on buttons, these need to be linked to the ViewModel and to the specific index. If we want we can change these to radio buttons.
+                I just thought these looked nicer. We can also try to change these to input type="button" to see if that helps
             <div id="answers">
-                <button data-bind="html: A" class="button">A.</button>
-                <button data-bind="html: B" class="button">B.</button>
-                <button data-bind="html: C" class="button">C.</button>
-                <button data-bind="html: D" class="button">D.</button>
-            </div>
+                <button data-bind="value: A" class="button"></button>
+                <button data-bind="value: B" class="button"></button>
+                <button data-bind="value: C" class="button"></button>
+                <button data-bind="value: D" class="button"></button>
+            </div>-->
             <!--Start button. onclick activates the hide function. I read something about knockout having a visibile/hidden binding, so we could try that-->
             <input type=button onClick="hide()" class="start-button" id="start" value="Start Quiz"/>
             <div id="next">
                 <button class="button" id="nextButton">Button</button>
             </div>
-        </div>
+      
         
        
     </body>
