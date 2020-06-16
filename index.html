@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,8 +9,7 @@
         <!--google fonts-->
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=PT+Mono&display=swap" rel="stylesheet">
         <!--knockout.js-->
-        <script type="text/javascript" src="knockout-3.5.1.js"></script>
-        <script type="text/javascript" src="app.js"></script>     
+        <script type="text/javascript" src="knockout-3.5.1.js"></script>       
        
     </head> 
     <body>   
@@ -28,29 +28,137 @@
         
 	 <div id="question">
            <!--Tried using a function (see bottom) to link the ViewModel at a specific index-->
-            <div data-bind="foreach: questions"> 
-                <div data-bind="text: question"></div>
-                <input type="button" class="button" data-bind="text: A"></input>
-                <input type="button" class="button" data-bind="text: B"></input>
-                <input type="button" class="button" data-bind="text: C"></input>
-                <input type="button" class="button" data-bind="text: D"></input>              
+            <div data-bind="foreach: Questions"> 
+              <br>
+             <div data-bind="text: Id"></div> <div data-bind="text: Name"></div>             
+                <input type="button" class="button" data-bind="value: Answer1"></input>
+                <input type="button" class="button" data-bind="value: Answer2"></input>
+                <input type="button" class="button" data-bind="value: Answer3"></input>
+                <input type="button" class="button" data-bind="value: Answer4"></input>            
             </div>
        </div>
-            <!--answers will display on buttons, these need to be linked to the ViewModel and to the specific index. If we want we can change these to radio buttons.
-                I just thought these looked nicer. We can also try to change these to input type="button" to see if that helps
-            <div id="answers">
-                <button data-bind="value: A" class="button"></button>
-                <button data-bind="value: B" class="button"></button>
-                <button data-bind="value: C" class="button"></button>
-                <button data-bind="value: D" class="button"></button>
-            </div>-->
-            <!--Start button. onclick activates the hide function. I read something about knockout having a visibile/hidden binding, so we could try that-->
-            <input type=button onClick="hide()" class="start-button" id="start" value="Start Quiz"/>
-            <div id="next">
-                <button class="button" id="nextButton">Button</button>
+    <br />
+    
+   
+      <input type=button onClick="hide()" class="start-button" id="start" value="Start Quiz"/>
+      <div id="next">
+          <button class="button" id="nextButton">Button</button>
+      </div>
+      <div class="col-sm-4" data-bind="if: Question">
+        <div class="card card-inverse" style="background-color: #333; border-color:#333; color: white;">
+          <div class="card-block p-3">
+            <h3 class="card-title">Question List</h3>
+            <div class="card-text"> 
+                <div data-bind="text: Question().Id"></div> <div data-bind="text: Question().Name"></div>             
+                <input type="button" class="button" data-bind="value: Question().Answer1"></input>
+                <input type="button" class="button" data-bind="value: Question().Answer2"></input>
+                <input type="button" class="button" data-bind="value: Question().Answer3"></input>
+                <input type="button" class="button" data-bind="value: Question().Answer4"></input>
             </div>
-      
-        
-       
-    </body>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+  </div>
+  <script>
+   function hide(){
+    if(document.getElementById){ 
+        document.getElementById("start").style.visibility = "hidden";
+        document.getElementById("jsquiz").style.visibility = "hidden";
+        document.getElementById("question").style.visibility = "visible";
+        document.getElementById("answers").style.visibility = "visible";
+    }
+}
+
+    function Question(id, name, answer1, answer2, answer3, answer4) {
+      this.Id = id;
+      this.Name = name;
+      this.Answer1 = answer1;
+      this.Answer2 = answer2;
+      this.Answer3 = answer3;
+      this.Answer4 = answer4;
+
+    }
+    var questionList = [
+      new Question(1, "Question1", "Answer1", "Answer2", "Answer3", "Answer4"),
+      new Question(2, "Question2", "Answer1", "Answer2", "Answer3", "Answer4"),
+      new Question(3, "Question3", "Answer1", "Answer2", "Answer3", "Answer4"),
+      new Question(4, "Question4", "Answer1", "Answer2", "Answer3", "Answer4"),
+      new Question(5, "Question5", "Answer1", "Answer2", "Answer3", "Answer4"),
+      new Question(6, "Question6", "Answer1", "Answer2", "Answer3", "Answer4"),
+      new Question(7, "Question7", "Answer1", "Answer2", "Answer3", "Answer4"),
+      new Question(8, "Question8", "Answer1", "Answer2", "Answer3", "Answer4"),
+      new Question(9, "Question9", "Answer1", "Answer2", "Answer3", "Answer4"),
+      new Question(10, "Question10", "Answer1", "Answer2", "Answer3", "Answer4")
+    ];
+
+    function QuizViewModel()
+    {
+
+      var self = this;
+      self.error = ko.observable("");
+      self.Id = ko.observable("");
+      self.Name = ko.observable("");
+      self.Answer1 = ko.observable("");
+      self.Answer2 = ko.observable("");
+      self.Answer3 = ko.observable("");
+      self.Answer4 = ko.observable("");
+
+      self.questionToAdd = ko.observable("");
+      self.answer1ToAdd = ko.observable("");
+      self.answer2ToAdd = ko.observable("");
+      self.answer3ToAdd = ko.observable("");
+      self.answer4ToAdd = ko.observable("");
+
+      var Question = {
+        Id: self.Id,
+        Name: self.Name,
+        Answer1: self.Answer1,        
+        Answer2: self.Answer2,
+        Answer3: self.Answer3,
+        Answer4: self.Answer4
+      };
+
+      self.Question = ko.observable();
+      self.Questions = ko.observableArray(questionList);
+
+      self.add = function () {
+        if ((self.questionToAdd() !== "") && (self.Questions.indexOf(self.questionToAdd()) < 0))
+        {
+          self.error("");
+          self.Questions.push({Id: self.Questions().length, Name: self.questionToAdd(), Answer1: self.answer1ToAdd(), Answer2: self.answer2ToAdd(), Answer3: self.answer1ToAdd(), Answer4: self.answer2ToAdd()});
+        }
+        else
+        {
+          self.error("Duplicate or Invalid Entry.");
+        }
+        self.questionToAdd("");
+        self.answer1ToAdd("");
+        self.answer2ToAdd("");
+        self.answer3ToAdd("");
+        self.answer4ToAdd("");
+
+      }
+
+      self.edit = function (Question) {
+        self.Question(Question);
+      };
+
+      self.remove = function (Question) {
+        self.Questions.remove(Question);
+      };
+      self.cancel = function () {
+        self.Question(null);
+      };
+      self.update = function () {
+        var l_question = self.Question();
+        self.Questions.remove(self.Question());
+        self.Questions.push(l_question);
+      }
+    }
+    ko.applyBindings(new QuizViewModel());
+
+  </script>
+</body>
 </html>
