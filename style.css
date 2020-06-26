@@ -14,7 +14,7 @@
 	font-family: 'PT Mono', monospace;
 	font-size: 60px;
 	color: rgba(242,174,15,1);
-    padding-top: 2%;
+    padding-top: 2%;    
 }
 
 #yellow{
@@ -49,6 +49,8 @@
 	color: rgba(59,52,122,1);
     top: 70%;
     left: 41%;
+    z-index: 5;
+    visibility: visible;
 }
 
 #question{
@@ -58,10 +60,12 @@
     font-family: 'Open Sans', sans-serif;
 	font-size: 40px;
     text-align: center;
+    margin-top: ;
 }
 
 #answers{
     visibility: hidden;
+    color: rgba(59, 52, 122, 1);
 }
 
 .button{
@@ -73,10 +77,55 @@
     display: block;
     margin: auto;
     margin-bottom: 25px;
+    height: auto;
+    width: 600px;
 }
 
-#nextButton{
-    color: black;
+.navButton{
     background-color: rgba(242,174,15,1);
     visibility: hidden;
+    border-radius: 10px;
+    font-size: 30px;
+    font-family: 'Open Sans', sans-serif;
+    color: rgba(59,52,122,1);
+    width: 150px;
+    display: inline-block;
+}
+
+#back{
+    float: left;
+    margin-left: 50px;
+   
+}
+
+#beginner{
+    visibility: hidden;
+}
+
+#novice{
+    visibility: hidden;
+}
+
+#Expert{
+    visibility: hidden;
+}
+
+#next{
+    float: right;
+    margin-right: 50px;
+}
+
+#position{
+    color: rgba(59, 52, 122, 1);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    visibility: hidden;
+    margin-left: 43%;
+    margin-top: 5px;
+}
+
+#nav{
+    justify-content: center;
+    display: inline;
+    align-content: center;
 }
