@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Javascript Trivia Quiz</title>
+        <!--<script src="Quiz.js"></script>-->
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+        <!--google fonts-->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=PT+Mono&display=swap" rel="stylesheet"/>
+        <!--knockout.js-->
+        <script src="knockout-v3.5.1.js"></script>
+        <!--jQuery library-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <header>
+        <!--purple div/main title/nav bar-->
+        <div class="topdiv">	
+            <h1>Javascript Trivia</h1>
+	    </div>
+        <!--yellow div-->
+        <div id="yellow"></div>
+    </header>
+    <body>
+        <!--landing page heading/disappears when start is clicked-->
+	    <div id="jsquiz">
+            <h2>Welcome to the JavaScript trivia quiz!</h2>
+        </div>
+        <input type="button" onClick="hide()" class="start-button" id="start" value="Start Quiz"/>
+        
+        <div id="quiz">
+            <p id="question"></p>
+ 
+            <div id="answers">
+                <button class = "button" id="opt1"><span id="answer1"></span></button>
+                <button class = "button" id="opt2"><span id="answer2"></span></button>
+                <button class = "button" id="opt3"><span id="answer3"></span></button>
+                <button class = "button" id="opt4"><span id="answer4"></span></button>
+            </div>
+            
+            <div id="nav">
+                <button class="navButton" id="back" data-bind="click: prev, enable: index() > 0">Previous</button>
+                <!--Page position counter-->
+                <p id="position">Question x of y</p>
+                <button class="navButton" id="next" data-bind="click: next, enable: index() < questions.length -1">Next</button>
+            </div>
+        </div>
+        <div id="results">
+            <div id="beginner">
+                <img src="images/Beginner.png"/>
+                <h3>Time to Study!</h3>
+                <p>
+                    You have some things to work on, but don't be discouraged. Learning new things is never an easy process. With time and practice, JavaScript will become second nature. Keep learning and improving, and you will be an Expert in no time!
+                </p>
+            </div>
+            <div id="novice">
+                <img src="images/Novice.jpg">
+                <h3>You are off to a great start!</h3>
+                <p>
+                    You know your stuff, but you still have a few things to work on. Keep learning and improving, and you will be an Expert in no time!
+                </p>
+            </div>
+            <div id="expert">
+                <img src="images/Expert.png">
+                <h3>Congratulations</h3>
+                <p>
+                    You are a JavaScript Expert! Flaunt yout skills with pride. You walk the walk AND talk the talk. Don't be afraid to give advice to those who are less fortunate. There is only one thing left to do... Keep Improving!
+                </p>
+            </div>
+        
+<script>
+    //controls element visibility for start button
+    function hide(){
+        if(document.getElementById){ 
+            document.getElementById("start").style.visibility = "hidden";
+            document.getElementById("jsquiz").style.visibility = "hidden";
+            document.getElementById("question").style.visibility = "visible";
+            document.getElementById("answers").style.visibility = "visible";
+            document.getElementById("next").style.visibility = "visible";
+            document.getElementById("back").style.visibility = "visible";
+            document.getElementById("position").style.visibility = "visible";
+        }
+    };    
+    
+    //Questions array
+    var questions = [
+    new Question("Which of the following is not an escape sequence in JavaScript?", ["\\", "\\t","\\r", "\\\'"], "\\"),
+    new Question("Which method of an Array is a function for each element in the array?", ["forEach()", "every()", "forEvery()", "each()"], "forEach()"),
+    new Question("Which of the following are used to enclose function parameters?", ["{}", "[]","()", "<>"], "()"),
+    new Question("Under which HTML tag is JavaScript code written?", ["\u2039javascript\u203A", "\u2039jscode\u203A", "\u2039js\u203A", "\u2039script\u203A"], "\u2039script\u203A"),
+    new Question("How do you call myFunction() in JavaScript?", ["Call myFunc()", "myFunction()", "Call function myFunction()", "function myFunction"], "myFunction()"),
+    new Question("Which of the following is not valid in JavaScript?",["const name = 'John';", "var name = 'John';", "console.log(name);", "int number = 10;"], "int number = 10;"),
+    new Question("Which assignment operator is invalid in JavaScript?", ["x **= y;", "x == y;", "x %= y;", "x -= y;"], "x == y;"),
+    new Question("JavaScript is a ________-side scripting language.", ["Server", "ISP", "Browser", "All of the above."], "Browser"),
+    new Question("Which of the following JavaScript statements displays 'HelloWorld' in an alert box?", ["alerttext(“HelloWorld!”);", "alertmsg(“HelloWorld!”);", "msgbox(“HelloWorld!”);", "alert(“HelloWorld!”);"], "alert(“HelloWorld!”)"),
+    new Question("What is the correct syntax for adding a comment in JavaScript?", ["//This is a comment", "\u2039!--This is a comment--\u203A", "-*This is a comment", "!This is a comment"], "//This is a comment")
+];
+
+    //Quiz model/variables
+    function Quiz(questions) {
+        this.correct = 0;
+        this.questions = questions;
+        this.qIndex = 0;
+    }
+
+    //keeps track of the index of questions/answers
+    Quiz.prototype.getQIndex = function() {
+        return this.questions[this.qIndex];
+    }
+ 
+    //Adds to the correct counter if the user is correct
+    Quiz.prototype.input = function(answer) {
+        if(this.getQIndex().isCorrect(answer)) {
+            this.correct++;
+    }
+     this.qIndex++;
+    }
+    
+    //tests whether the quiz is complete by checking to see if the 
+    //index of questions array is equal to the length of questions array
+    Quiz.prototype.finished = function() {
+        return this.qIndex === this.questions.length;
+    }
+ 
+    //Sets up the Question model
+    function Question(quest, answers, correctAnswer) {
+        this.quest = quest;
+        this.answers = answers;
+        this.correctAnswer = correctAnswer;
+    }
+    
+    //determines if user's answer is correct
+    Question.prototype.isCorrect = function(userAnswer) {
+        return this.correctAnswer === userAnswer;
+    }
+ 
+ 
+    function nextQuestion() {
+        //if the question index is equal to question length, show score and ranking
+        if(this.qIndex=== this.questions.length) {
+            ranking();
+        } else {
+            // get the next question
+            var element= document.getElementById("question");
+            element.innerHTML = quiz.getQIndex().quest;
+             //get next set of answers
+            var answers = quiz.getQIndex().answers;
+            for(var x = 0; x < answers.length; x++) {
+                var element = document.getElementById("answer" + (x+1));
+                element.innerHTML = answers[x];
+                input("opt" + (x+1), answers[x]);
+            } 
+            //update the progress bar
+            quizPosition();
+        }
+    };
+ 
+    //move on to the next question when user selects an answer
+    function input(id, input) {
+        var button = document.getElementById(id);
+            button.onclick = function() {
+            quiz.input(input);
+        nextQuestion();
+        }
+    };
+ 
+    //updates the position in the quiz by the index number
+    function quizPosition() {
+        var currentQ = quiz.qIndex + 1;
+        var element = document.getElementById("position");
+        element.innerHTML = "Question " + currentQ + " of " + quiz.questions.length;
+    };
+ 
+    
+    function ranking() {
+        var QuizEnd = "<h1>Result</h1>";
+        QuizEnd += "<h2 id='score'> Your scores: " + quiz.correct + "</h2>";
+        var element = document.getElementById("quiz");
+        element.innerHTML = QuizEnd;
+    };
+ 
+    /*function ranking(){
+        if (quiz.correct >= 8){
+            document.getElementById("expert").style.visibility = "visible";
+        }
+        else if(quiz.correct < 6) {
+                document.getElementById("beginner").style.visibility = "visible"
+                };
+        else {
+            document.getElementById("novice").style.visibility = "visible"
+        };
+    }*/
+
+ 
+// create quiz
+var quiz = new Quiz(questions);
+ 
+// shows first question/answers
+nextQuestion();
+    
+    
+</script>  
+
+</body>
+</html>
